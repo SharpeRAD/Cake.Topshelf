@@ -56,7 +56,7 @@ Task("Install")
     .Description("Installs a Topshelf service")
     .Does(() =>
 {
-    TopshelfInstall("C:/Services/example.exe", new TopshelfSettings()
+    InstallTopshelf("C:/Services/example.exe", new TopshelfSettings()
     {
         Username = "Admin",
         Password = "Password1",
@@ -71,7 +71,7 @@ Task("Uninstall")
     .Description("Uninstalls a Topshelf service")
     .Does(() =>
 {
-    TopshelfUninstall("C:/Services/example.exe");
+    UninstallTopshelf("C:/Services/example.exe");
 });
 
 
@@ -80,14 +80,14 @@ Task("Start")
     .Description("Starts a Topshelf service")
     .Does(() =>
 {
-    TopshelfStart("C:/Services/example.exe", "Instance Name");
+    StartTopshelf("C:/Services/example.exe", "Instance Name");
 });
 
 Task("Stop")
     .Description("Stops a Topshelf service")
     .Does(() =>
 {
-    TopshelfStop("C:/Services/example.exe", "Instance Name");
+    StopTopshelf("C:/Services/example.exe", "Instance Name");
 });
 
 RunTarget("Install");
