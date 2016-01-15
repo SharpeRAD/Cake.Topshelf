@@ -175,7 +175,6 @@ Task("Copy-Files")
 
 
 
-    CopyDirectory("./tools/",  "./test/tools/");
     CreateDirectory("./test/tools/Addins/Cake.Topshelf/lib/net45/");
 
     CopyFileToDirectory(buildDir + "/Cake.Topshelf.dll", "./test/tools/Addins/Cake.Topshelf/lib/net45/");
