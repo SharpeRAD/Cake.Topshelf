@@ -1,7 +1,7 @@
 # Cake.Topshelf
 Cake Build addon for managing Topshelf windows services
 
-[![Build status](https://ci.appveyor.com/api/projects/status/4ymtu0it99v31726?svg=true)](https://ci.appveyor.com/project/SharpeRAD/cake-aws-s3)
+[![Build status](https://ci.appveyor.com/api/projects/status/smmki80m1s7yi7xe?svg=true)](https://ci.appveyor.com/project/SharpeRAD/cake-topshelf)
 
 [![cakebuild.net](https://img.shields.io/badge/WWW-cakebuild.net-blue.svg)](http://cakebuild.net/)
 
@@ -104,6 +104,7 @@ A complete Cake example can be found [here](https://github.com/SharpeRAD/Cake.To
 ## License
 
 Copyright © 2015 - 2016 Sergio Silveira, Phillip Sharpe
+
 Cake.Topshelf is provided as-is under the MIT license. For more information see [LICENSE](https://github.com/SharpeRAD/Cake.Topshelf/blob/master/LICENSE).
 
 
