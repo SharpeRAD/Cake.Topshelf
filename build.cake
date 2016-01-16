@@ -42,7 +42,7 @@ var nugetRoot = buildResultDir + "/nuget";
 var binDir = buildResultDir + "/bin";
 
 //Get Solutions
-var solutions       = GetFiles("./src/*.sln");
+var solutions = GetFiles("./src/*.sln");
 
 // Package
 var zipPackage = buildResultDir + "/Cake-Topshelf-v" + semVersion + ".zip";
@@ -60,7 +60,7 @@ Setup(() =>
     //Executed BEFORE the first task.
     Information("Building version {0} of {1}.", semVersion, appName);
 
-    NuGetInstall("xunit.runner.console", new NuGetInstallSettings 
+    NuGetInstall("xunit.runner.console", new NuGetInstallSettings
     {
         ExcludeVersion  = true,
         OutputDirectory = tools
@@ -85,9 +85,10 @@ Task("Clean")
 {
     // Clean solution directories.
     Information("Cleaning old files");
-    CleanDirectories(new DirectoryPath[] 
+
+    CleanDirectories(new DirectoryPath[]
     {
-        buildDir, buildTestDir, buildResultDir, 
+        buildDir, buildTestDir, buildResultDir,
         binDir, testResultsDir, nugetRoot
     });
 });
@@ -100,6 +101,7 @@ Task("Restore-Nuget-Packages")
     foreach(var solution in solutions)
     {
         Information("Restoring {0}", solution);
+
         NuGetRestore(solution);
     }
 });
@@ -118,7 +120,7 @@ Task("Patch-Assembly-Info")
 {
     var file = "./src/SolutionInfo.cs";
 
-    CreateAssemblyInfo(file, new AssemblyInfoSettings 
+    CreateAssemblyInfo(file, new AssemblyInfoSettings
     {
         Product = appName,
         Version = version,
@@ -136,7 +138,7 @@ Task("Build")
     foreach(var solution in solutions)
     {
         Information("Building {0}", solution);
-        MSBuild(solution, settings => 
+        MSBuild(solution, settings =>
             settings.SetPlatformTarget(PlatformTarget.MSIL)
                 .WithProperty("TreatWarningsAsErrors","true")
                 .WithTarget("Build")
@@ -148,7 +150,7 @@ Task("Run-Unit-Tests")
     .IsDependentOn("Build")
     .Does(() =>
 {
-    XUnit2("./src/**/bin/" + configuration + "/*.Tests.dll", new XUnit2Settings 
+    XUnit2("./src/**/bin/" + configuration + "/*.Tests.dll", new XUnit2Settings
     {
         OutputDirectory = testResultsDir,
         XmlReportV1 = true
@@ -167,6 +169,7 @@ Task("Copy-Files")
     .IsDependentOn("Build")
     .Does(() =>
 {
+    // Addin
     CopyFileToDirectory(buildDir + "/Cake.Topshelf.dll", binDir);
     CopyFileToDirectory(buildDir + "/Cake.Topshelf.pdb", binDir);
     CopyFileToDirectory(buildDir + "/Cake.Topshelf.xml", binDir);
@@ -175,6 +178,7 @@ Task("Copy-Files")
 
 
 
+    // Test
     CreateDirectory("./test/tools/Addins/Cake.Topshelf/lib/net45/");
 
     CopyFileToDirectory(buildDir + "/Cake.Topshelf.dll", "./test/tools/Addins/Cake.Topshelf/lib/net45/");
@@ -193,12 +197,12 @@ Task("Create-NuGet-Packages")
     .IsDependentOn("Zip-Files")
     .Does(() =>
 {
-    NuGetPack("./nuspec/Cake.Topshelf.nuspec", new NuGetPackSettings 
+    NuGetPack("./nuspec/Cake.Topshelf.nuspec", new NuGetPackSettings
     {
         Version = version,
         ReleaseNotes = releaseNotes.Notes.ToArray(),
         BasePath = binDir,
-        OutputDirectory = nugetRoot,        
+        OutputDirectory = nugetRoot,
         Symbols = false,
         NoPackageAnalysis = true
     });
@@ -207,13 +211,13 @@ Task("Create-NuGet-Packages")
 Task("Publish-Nuget")
     .IsDependentOn("Create-NuGet-Packages")
     .WithCriteria(() => isRunningOnAppVeyor)
-    .WithCriteria(() => !isPullRequest) 
+    .WithCriteria(() => !isPullRequest)
     .Does(() =>
 {
     // Resolve the API key.
     var apiKey = EnvironmentVariable("NUGET_API_KEY");
 
-    if(string.IsNullOrEmpty(apiKey)) 
+    if(string.IsNullOrEmpty(apiKey))
     {
         throw new InvalidOperationException("Could not resolve MyGet API key.");
     }
@@ -223,10 +227,10 @@ Task("Publish-Nuget")
     // Push the package.
     var package = nugetRoot + "/Cake.Topshelf." + version + ".nupkg";
 
-    NuGetPush(package, new NuGetPushSettings 
+    NuGetPush(package, new NuGetPushSettings
     {
         ApiKey = apiKey
-    }); 
+    });
 });
 
 
@@ -242,7 +246,7 @@ Task("Update-AppVeyor-Build-Number")
     .Does(() =>
 {
     AppVeyor.UpdateBuildVersion(semVersion);
-}); 
+});
 
 Task("Upload-AppVeyor-Artifacts")
     .IsDependentOn("Zip-Files")
@@ -250,7 +254,7 @@ Task("Upload-AppVeyor-Artifacts")
     .Does(() =>
 {
     AppVeyor.UploadArtifact(zipPackage);
-}); 
+});
 
 
 
@@ -266,7 +270,7 @@ Task("Slack")
     // Resolve the API key.
     var token = EnvironmentVariable("SLACK_TOKEN");
 
-    if(string.IsNullOrEmpty(token)) 
+    if(string.IsNullOrEmpty(token))
     {
         throw new InvalidOperationException("Could not resolve Slack token.");
     }
@@ -275,7 +279,7 @@ Task("Slack")
 
     // Post Message
     var text = "Published " + appName + " v" + version;
-    
+
     var result = Slack.Chat.PostMessage(token, "#code", text);
 
     if (result.Ok)
@@ -310,7 +314,7 @@ Task("AppVeyor")
     .IsDependentOn("Update-AppVeyor-Build-Number")
     .IsDependentOn("Upload-AppVeyor-Artifacts")
     .IsDependentOn("Slack");
-    
+
 
 
 Task("Default")
