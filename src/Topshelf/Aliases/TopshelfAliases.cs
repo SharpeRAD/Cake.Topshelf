@@ -1,5 +1,6 @@
 ﻿#region Using Statements
     using Cake.Core;
+    using Cake.Core.IO;
     using Cake.Core.Annotations;
 #endregion
 
@@ -26,7 +27,7 @@ namespace Cake.Topshelf
         /// <param name="context">The cake context.</param>
         /// <param name="filePath">The file path of the Topshelf executable to install.</param>
         [CakeMethodAlias]
-        public static void InstallTopshelf(this ICakeContext context, string filePath)
+        public static void InstallTopshelf(this ICakeContext context, FilePath filePath)
         {
             context.CreateManager().InstallService(filePath, null);
         }
@@ -38,7 +39,7 @@ namespace Cake.Topshelf
         /// <param name="filePath">The file path of the Topshelf executable to install.</param>
         /// <param name="settings">The <see cref="TopshelfSettings"/> used to install the service.</param>
         [CakeMethodAlias]
-        public static void InstallTopshelf(this ICakeContext context, string filePath, TopshelfSettings settings)
+        public static void InstallTopshelf(this ICakeContext context, FilePath filePath, TopshelfSettings settings)
         {
             context.CreateManager().InstallService(filePath, settings);
         }
@@ -51,7 +52,7 @@ namespace Cake.Topshelf
         /// <param name="context">The cake context.</param>
         /// <param name="filePath">The file path of the Topshelf executable to uninstall.</param>
         [CakeMethodAlias]
-        public static void UninstallTopshelf(this ICakeContext context, string filePath)
+        public static void UninstallTopshelf(this ICakeContext context, FilePath filePath)
         {
             context.CreateManager().UninstallService(filePath);
         }
@@ -63,7 +64,7 @@ namespace Cake.Topshelf
         /// <param name="filePath">The file path of the Topshelf executable to uninstall.</param>
         /// <param name="instance">The instance name of the service to uninstall.</param>
         [CakeMethodAlias]
-        public static void UninstallTopshelf(this ICakeContext context, string filePath, string instance)
+        public static void UninstallTopshelf(this ICakeContext context, FilePath filePath, string instance)
         {
             context.CreateManager().UninstallService(filePath, instance);
         }
@@ -76,7 +77,7 @@ namespace Cake.Topshelf
         /// <param name="instance">The instance name of the service to uninstall.</param>
         /// <param name="timeout">The time in milliseconds to wait for the Topshelf executable.</param>
         [CakeMethodAlias]
-        public static void UninstallTopshelf(this ICakeContext context, string filePath, string instance, int timeout)
+        public static void UninstallTopshelf(this ICakeContext context, FilePath filePath, string instance, int timeout)
         {
             context.CreateManager().UninstallService(filePath, instance, timeout);
         }
@@ -89,7 +90,7 @@ namespace Cake.Topshelf
         /// <param name="context">The cake context.</param>
         /// <param name="filePath">The file path of the Topshelf executable to start.</param>
         [CakeMethodAlias]
-        public static void StartTopshelf(this ICakeContext context, string filePath)
+        public static void StartTopshelf(this ICakeContext context, FilePath filePath)
         {
             context.CreateManager().StartService(filePath);
         }
@@ -101,7 +102,7 @@ namespace Cake.Topshelf
         /// <param name="filePath">The file path of the Topshelf executable to start.</param>
         /// <param name="instance">The instance name of the service to start.</param>
         [CakeMethodAlias]
-        public static void StartTopshelf(this ICakeContext context, string filePath, string instance)
+        public static void StartTopshelf(this ICakeContext context, FilePath filePath, string instance)
         {
             context.CreateManager().StartService(filePath, instance);
         }
@@ -114,7 +115,7 @@ namespace Cake.Topshelf
         /// <param name="instance">The instance name of the service to start.</param>
         /// <param name="timeout">The time in milliseconds to wait for the Topshelf executable.</param>
         [CakeMethodAlias]
-        public static void StartTopshelf(this ICakeContext context, string filePath, string instance, int timeout)
+        public static void StartTopshelf(this ICakeContext context, FilePath filePath, string instance, int timeout)
         {
             context.CreateManager().StartService(filePath, instance, timeout);
         }
@@ -127,7 +128,7 @@ namespace Cake.Topshelf
         /// <param name="context">The cake context.</param>
         /// <param name="filePath">The file path of the Topshelf executable to stop.</param>
         [CakeMethodAlias]
-        public static void StopTopshelf(this ICakeContext context, string filePath)
+        public static void StopTopshelf(this ICakeContext context, FilePath filePath)
         {
             context.CreateManager().StopService(filePath);
         }
@@ -139,7 +140,7 @@ namespace Cake.Topshelf
         /// <param name="filePath">The file path of the Topshelf executable to stop.</param>
         /// <param name="instance">The instance name of the service to stop.</param>
         [CakeMethodAlias]
-        public static void StopTopshelf(this ICakeContext context, string filePath, string instance)
+        public static void StopTopshelf(this ICakeContext context, FilePath filePath, string instance)
         {
             context.CreateManager().StopService(filePath, instance);
         }
@@ -152,7 +153,7 @@ namespace Cake.Topshelf
         /// <param name="instance">The instance name of the service to stop.</param>
         /// <param name="timeout">The time in milliseconds to wait for the Topshelf executable.</param>
         [CakeMethodAlias]
-        public static void StopTopshelf(this ICakeContext context, string filePath, string instance, int timeout)
+        public static void StopTopshelf(this ICakeContext context, FilePath filePath, string instance, int timeout)
         {
             context.CreateManager().StopService(filePath, instance, timeout);
         }

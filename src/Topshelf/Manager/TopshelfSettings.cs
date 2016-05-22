@@ -27,14 +27,11 @@ namespace Cake.Topshelf
 
         #region Properties (8)
             /// <summary>
-            /// Gets or sets the working directory for the process to be started.
-            /// </summary>
-            public DirectoryPath WorkingDirectory { get; set; }
-
-            /// <summary>
             /// Sets the arguments to use during installation
             /// </summary>
             public ProcessArgumentBuilder Arguments { get; set; }
+
+
 
             /// <summary>
             /// Gets or sets the time in milliseconds to wait for the Topshelf executable to install

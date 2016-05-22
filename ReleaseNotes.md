@@ -1,3 +1,8 @@
+### New in 0.0.5 (Released 2016/05/21)
+* Rewrite ExecuteProcess
+* Remove WorkingDirectory from TopshelfSettings
+* Use FilePath in all aliases
+
 ### New in 0.0.4 (Released 2016/05/17)
 * Add nuget dependencies
 * Update all packages
