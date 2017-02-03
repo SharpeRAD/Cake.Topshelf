@@ -1,3 +1,6 @@
+### New in 0.0.6 (Released 2017/02/03)
+* Update Cake.Core reference
+
 ### New in 0.0.5 (Released 2016/05/21)
 * Rewrite ExecuteProcess
 * Remove WorkingDirectory from TopshelfSettings
