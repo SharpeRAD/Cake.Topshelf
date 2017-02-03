@@ -28,6 +28,7 @@ namespace Cake.Topshelf.Tests
         public Verbosity Verbosity
         {
             get { return Verbosity.Diagnostic; }
+            set { }
         }
 
 
