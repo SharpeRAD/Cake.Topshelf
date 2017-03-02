@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="Aliases\TopshelfAliases.cs" />
     <Compile Include="Extensions\TopshelfSettingsExtensions.cs" />
+    <Compile Include="Manager\InstallArgumentsFactory.cs" />
     <Compile Include="Manager\TopshelfSettings.cs" />
     <Compile Include="Interfaces\ITopshelfManager.cs" />
     <Compile Include="Manager\TopshelfManager.cs" />
