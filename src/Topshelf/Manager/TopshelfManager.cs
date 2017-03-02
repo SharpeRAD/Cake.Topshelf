@@ -61,7 +61,7 @@ namespace Cake.Topshelf
 
 
         #region Functions (6)
-            private void ExecuteProcess(FilePath filePath, ProcessArgumentBuilder arguments, int timeout = 60000)
+            private void ExecuteProcess(FilePath filePath, ProcessArgumentBuilder arguments, int timeout = DefaultTimeoutMs)
             {
                 try
                 {
@@ -186,7 +186,7 @@ namespace Cake.Topshelf
             /// <param name="filePath">The file path of the Topshelf executable to uninstall.</param>
             /// <param name="instance">The instance name of the service to uninstall.</param>
             /// <param name="timeout">The time in milliseconds to wait for the Topshelf executable.</param>
-            public void UninstallService(FilePath filePath, string instance = null, int timeout = 60000)
+            public void UninstallService(FilePath filePath, string instance = null, int timeout = DefaultTimeoutMs)
             {
                 if (filePath == null)
                 {
@@ -206,7 +206,7 @@ namespace Cake.Topshelf
             /// <param name="filePath">The file path of the Topshelf executable to start.</param>
             /// <param name="instance">The instance name of the service to start.</param>
             /// <param name="timeout">The time in milliseconds to wait for the Topshelf executable.</param>
-            public void StartService(FilePath filePath, string instance = null, int timeout = 60000)
+            public void StartService(FilePath filePath, string instance = null, int timeout = DefaultTimeoutMs)
             {
                 if (filePath == null)
                 {
@@ -224,7 +224,7 @@ namespace Cake.Topshelf
             /// <param name="filePath">The file path of the Topshelf executable to stop.</param>
             /// <param name="instance">The instance name of the service to stop.</param>
             /// <param name="timeout">The time in milliseconds to wait for the Topshelf executable.</param>
-            public void StopService(FilePath filePath, string instance = null, int timeout = 60000)
+            public void StopService(FilePath filePath, string instance = null, int timeout = DefaultTimeoutMs)
             {
                 if (filePath == null)
                 {
