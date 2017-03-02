@@ -92,8 +92,6 @@ namespace Cake.Topshelf
 
                 builder.Append(new TextArgument("install"));
 
-
-
                 if (settings != null)
                 {
                     if (!string.IsNullOrWhiteSpace(settings.Username))
@@ -136,7 +134,7 @@ namespace Cake.Topshelf
                     if (!string.IsNullOrWhiteSpace(settings.ServiceName))
                     {
                         builder.Append(new TextArgument("--servicename"));
-                        builder.Append(new QuotedArgument(new TextArgument(settings.Description)));
+                        builder.Append(new QuotedArgument(new TextArgument(settings.ServiceName)));
                     }
 
                     if (!string.IsNullOrWhiteSpace(settings.Description))

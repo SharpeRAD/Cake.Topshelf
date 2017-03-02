@@ -207,7 +207,7 @@ namespace Cake.Topshelf.Tests.Manager
             _processSettingsPassed.Arguments.Render().Should().Contain(" --networkservice");
         }
 
-        [Fact(Skip = "ExistingBug!")]
+        [Fact]
         public void InstallService_WhenSetting_ServiceName_ShouldAddToTopshelfArgs()
         {
             var sut = CreateSut();
