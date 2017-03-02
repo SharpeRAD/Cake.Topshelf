@@ -167,7 +167,13 @@ namespace Cake.Topshelf
                     throw new ArgumentNullException("filePath");
                 }
 
-                this.ExecuteProcess(filePath, this.GetInstallArguments(settings), settings.Timeout);
+                int timeout = 60000;
+                if (settings != null)
+                {
+                    timeout = settings.Timeout;
+                }
+
+                this.ExecuteProcess(filePath, this.GetInstallArguments(settings), timeout);
 
                 _Log.Verbose("Topshelf service installed.");
             }
