@@ -8,7 +8,7 @@ namespace Cake.Topshelf.Tests.Manager
     {
         private readonly DebugLog _debugLog;
         private readonly IProcessRunner _processRunner;
-        private IProcess _process;
+        private readonly IProcess _process;
 
         const int ExpectedDefaultTimeoutMs = 60000;
 
@@ -20,6 +20,14 @@ namespace Cake.Topshelf.Tests.Manager
 
             _processRunner.Start(Arg.Any<FilePath>(), Arg.Any<ProcessSettings>())
                 .Returns(_process);
+        }
+
+        private TopshelfManager CreateSut()
+        {
+            return new TopshelfManager(
+                CakeHelper.CreateEnvironment(),
+                _processRunner,
+                _debugLog);
         }
 
         [Fact]
@@ -44,12 +52,70 @@ namespace Cake.Topshelf.Tests.Manager
                 .WaitForExit(100);
         }
 
-        private TopshelfManager CreateSut()
+        [Fact]
+        public void UninstallService_WhenNoSettingsSupplied_ShouldUseDefaultTimeout()
         {
-            return new TopshelfManager(
-                CakeHelper.CreateEnvironment(), 
-                _processRunner,
-                _debugLog);
+            var sut = CreateSut();
+
+            sut.UninstallService(new FilePath("SomePath"));
+
+            _process.Received()
+                .WaitForExit(ExpectedDefaultTimeoutMs);
+        }
+
+        [Fact]
+        public void UninstallService_WhenTimeoutSuppliedInSettings_ShouldUseSuppliedTimeout()
+        {
+            var sut = CreateSut();
+
+            sut.UninstallService(new FilePath("SomePath"), timeout: 100);
+
+            _process.Received()
+                .WaitForExit(100);
+        }
+
+        [Fact]
+        public void StartService_WhenNoSettingsSupplied_ShouldUseDefaultTimeout()
+        {
+            var sut = CreateSut();
+
+            sut.StartService(new FilePath("SomePath"));
+
+            _process.Received()
+                .WaitForExit(ExpectedDefaultTimeoutMs);
+        }
+
+        [Fact]
+        public void StartService_WhenTimeoutSuppliedInSettings_ShouldUseSuppliedTimeout()
+        {
+            var sut = CreateSut();
+
+            sut.StartService(new FilePath("SomePath"), timeout: 100);
+
+            _process.Received()
+                .WaitForExit(100);
+        }
+
+        [Fact]
+        public void StopService_WhenNoSettingsSupplied_ShouldUseDefaultTimeout()
+        {
+            var sut = CreateSut();
+
+            sut.StopService(new FilePath("SomePath"));
+
+            _process.Received()
+                .WaitForExit(ExpectedDefaultTimeoutMs);
+        }
+
+        [Fact]
+        public void StopService_WhenTimeoutSuppliedInSettings_ShouldUseSuppliedTimeout()
+        {
+            var sut = CreateSut();
+
+            sut.StopService(new FilePath("SomePath"), timeout: 100);
+
+            _process.Received()
+                .WaitForExit(100);
         }
     }
 }
