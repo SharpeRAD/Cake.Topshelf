@@ -16,6 +16,8 @@ namespace Cake.Topshelf
     /// </summary>
     public class TopshelfManager : ITopshelfManager
     {
+        const int DefaultTimeoutMs = 60000;
+
         #region Fields (3)
             private readonly ICakeEnvironment _Environment;
             private readonly IProcessRunner _Runner;
@@ -167,7 +169,7 @@ namespace Cake.Topshelf
                     throw new ArgumentNullException("filePath");
                 }
 
-                int timeout = 60000;
+                int timeout = DefaultTimeoutMs;
                 if (settings != null)
                 {
                     timeout = settings.Timeout;

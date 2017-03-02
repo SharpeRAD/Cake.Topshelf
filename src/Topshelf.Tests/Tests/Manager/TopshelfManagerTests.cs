@@ -8,11 +8,18 @@ namespace Cake.Topshelf.Tests.Manager
     {
         private readonly DebugLog _debugLog;
         private readonly IProcessRunner _processRunner;
+        private IProcess _process;
+
+        const int ExpectedDefaultTimeoutMs = 60000;
 
         public TopshelfManagerTests()
         {
             _debugLog = new DebugLog();
             _processRunner = Substitute.For<IProcessRunner>();
+            _process = Substitute.For<IProcess>();
+
+            _processRunner.Start(Arg.Any<FilePath>(), Arg.Any<ProcessSettings>())
+                .Returns(_process);
         }
 
         [Fact]
@@ -22,7 +29,19 @@ namespace Cake.Topshelf.Tests.Manager
 
             sut.InstallService(new FilePath("SomePath"));
 
-            _processRunner.Received().Start(Arg.Any<FilePath>(), Arg.Any<ProcessSettings>()).WaitForExit(60000);
+            _process.Received()
+                .WaitForExit(ExpectedDefaultTimeoutMs);
+        }
+
+        [Fact]
+        public void InstallService_WhenTimeoutSuppliedInSettings_ShouldUseSuppliedTimeout()
+        {
+            var sut = CreateSut();
+
+            sut.InstallService(new FilePath("SomePath"), new TopshelfSettings() { Timeout = 100 });
+
+            _process.Received()
+                .WaitForExit(100);
         }
 
         private TopshelfManager CreateSut()
