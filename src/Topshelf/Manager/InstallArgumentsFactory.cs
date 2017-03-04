@@ -60,31 +60,41 @@ namespace Cake.Topshelf
         private static void AppendNetworkService(TopshelfSettings settings, ProcessArgumentBuilder builder)
         {
             if (settings.NetworkService)
+            {
                 builder.Append(new TextArgument("--networkservice"));
+            }
         }
 
         private static void AppendLocalService(TopshelfSettings settings, ProcessArgumentBuilder builder)
         {
             if (settings.LocalService)
+            {
                 builder.Append(new TextArgument("--localservice"));
+            }
         }
 
         private static void AppendLocalSystem(TopshelfSettings settings, ProcessArgumentBuilder builder)
         {
             if (settings.LocalSystem)
+            {
                 builder.Append(new TextArgument("--localsystem"));
+            }
         }
 
         private static void AppendDelayed(TopshelfSettings settings, ProcessArgumentBuilder builder)
         {
             if (settings.Delayed)
+            {
                 builder.Append(new TextArgument("--delayed"));
+            }
         }
 
         private static void AppendDisabled(TopshelfSettings settings, ProcessArgumentBuilder builder)
         {
             if (settings.Disabled)
+            {
                 builder.Append(new TextArgument("--disabled"));
+            }
         }
 
         private static void AppendStartupMode(TopshelfSettings settings, ProcessArgumentBuilder builder)
@@ -125,6 +135,7 @@ namespace Cake.Topshelf
             {
                 builder = settings.Arguments;
             }
+
             return builder;
         }
 
