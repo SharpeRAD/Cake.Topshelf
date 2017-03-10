@@ -79,7 +79,7 @@ namespace Cake.Topshelf
         /// <param name="settings">The process settings.</param>
         /// <param name="name">The friendly name of the service</param>
         /// <returns>The same <see cref="TopshelfSettings"/> instance so that multiple calls can be chained.</returns>
-        public static TopshelfSettings SetDisplayname(this TopshelfSettings settings, string name)
+        public static TopshelfSettings SetDisplayName(this TopshelfSettings settings, string name)
         {
             if (settings == null)
             {
