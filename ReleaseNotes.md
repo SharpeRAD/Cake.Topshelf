@@ -1,3 +1,6 @@
+## New in 0.0.8 (Released 2017/03/19)
+* [Bug] Missing caps in SetDisplayname 
+
 ### New in 0.0.7 (Released 2017/03/04)
 * [Bug] Fix bug with setting service name from arguments
 * [Improvement] Test coverage
