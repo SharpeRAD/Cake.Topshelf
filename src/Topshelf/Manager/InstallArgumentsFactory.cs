@@ -34,7 +34,7 @@ namespace Cake.Topshelf
         {
             if (!string.IsNullOrWhiteSpace(settings.DisplayName))
             {
-                builder.Append(new TextArgument("--displayname"));
+                builder.Append(new TextArgument("-displayname"));
                 builder.Append(new QuotedArgument(new TextArgument(settings.DisplayName)));
             }
         }
@@ -43,7 +43,7 @@ namespace Cake.Topshelf
         {
             if (!string.IsNullOrWhiteSpace(settings.Description))
             {
-                builder.Append(new TextArgument("--description"));
+                builder.Append(new TextArgument("-description"));
                 builder.Append(new QuotedArgument(new TextArgument(settings.Description)));
             }
         }
@@ -52,7 +52,7 @@ namespace Cake.Topshelf
         {
             if (!string.IsNullOrWhiteSpace(settings.ServiceName))
             {
-                builder.Append(new TextArgument("--servicename"));
+                builder.Append(new TextArgument("-servicename"));
                 builder.Append(new QuotedArgument(new TextArgument(settings.ServiceName)));
             }
         }

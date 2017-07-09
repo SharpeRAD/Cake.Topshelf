@@ -218,7 +218,7 @@ namespace Cake.Topshelf.Tests.Manager
             });
 
             _processSettingsPassed.Arguments.Render().Should().StartWith("install ");
-            _processSettingsPassed.Arguments.Render().Should().Contain(" --servicename \"Terminator\"");
+            _processSettingsPassed.Arguments.Render().Should().Contain(" -servicename \"Terminator\"");
         }
 
         [Fact]
@@ -232,7 +232,7 @@ namespace Cake.Topshelf.Tests.Manager
             });
 
             _processSettingsPassed.Arguments.Render().Should().StartWith("install ");
-            _processSettingsPassed.Arguments.Render().Should().Contain(" --description \"SomeDescription\"");
+            _processSettingsPassed.Arguments.Render().Should().Contain(" -description \"SomeDescription\"");
         }
 
         [Fact]
@@ -246,7 +246,7 @@ namespace Cake.Topshelf.Tests.Manager
             });
 
             _processSettingsPassed.Arguments.Render().Should().StartWith("install ");
-            _processSettingsPassed.Arguments.Render().Should().Contain(" --displayname \"SomeDisplayName\"");
+            _processSettingsPassed.Arguments.Render().Should().Contain(" -displayname \"SomeDisplayName\"");
         }
         [Fact]
         public void UninstallService_WhenNoSettingsSupplied_ShouldUseDefaultTimeout()
