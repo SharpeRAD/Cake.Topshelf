@@ -1,10 +1,11 @@
 ﻿#region Using Statements
-    using System;
+using System;
+using System.Linq;
+using System.Collections.Generic;
 
-    using Cake.Core;
-    using Cake.Core.IO;
-    using Cake.Core.IO.Arguments;
-    using Cake.Core.Diagnostics;
+using Cake.Core;
+using Cake.Core.IO;
+using Cake.Core.Diagnostics;
 #endregion
 
 
@@ -16,12 +17,12 @@ namespace Cake.Topshelf
     /// </summary>
     public class TopshelfManager : ITopshelfManager
     {
+        #region Fields (3)
         const int DefaultTimeoutMs = 60000;
 
-        #region Fields (3)
-            private readonly ICakeEnvironment _Environment;
-            private readonly IProcessRunner _Runner;
-            private readonly ICakeLog _Log;
+        private readonly ICakeEnvironment _Environment;
+        private readonly IProcessRunner _Runner;
+        private readonly ICakeLog _Log;
         #endregion
 
 
@@ -29,136 +30,149 @@ namespace Cake.Topshelf
 
 
         #region Constructor (1)
-            /// <summary>
-            /// Initializes a new instance of the <see cref="TopshelfManager" /> class.
-            /// </summary>
-            /// <param name="environment">The environment.</param>
-            /// <param name="runner">The process runner.</param>
-            /// <param name="log">The log.</param>
-            public TopshelfManager(ICakeEnvironment environment, IProcessRunner runner, ICakeLog log)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TopshelfManager" /> class.
+        /// </summary>
+        /// <param name="environment">The environment.</param>
+        /// <param name="runner">The process runner.</param>
+        /// <param name="log">The log.</param>
+        public TopshelfManager(ICakeEnvironment environment, IProcessRunner runner, ICakeLog log)
+        {
+            if (environment == null)
             {
-                if (environment == null)
-                {
-                    throw new ArgumentNullException("environment");
-                }
-                if (runner == null)
-                {
-                    throw new ArgumentNullException("runner");
-                }
-                if (log == null)
-                {
-                    throw new ArgumentNullException("log");
-                }
-
-                _Environment = environment;
-                _Runner = runner;
-                _Log = log;
+                throw new ArgumentNullException("environment");
             }
+            if (runner == null)
+            {
+                throw new ArgumentNullException("runner");
+            }
+            if (log == null)
+            {
+                throw new ArgumentNullException("log");
+            }
+
+            _Environment = environment;
+            _Runner = runner;
+            _Log = log;
+        }
         #endregion
 
 
 
 
 
-        #region Functions (6)
-            private void ExecuteProcess(FilePath filePath, ProcessArgumentBuilder arguments, int timeout = DefaultTimeoutMs)
+        #region Methods (6)
+        private void ExecuteProcess(FilePath filePath, ProcessArgumentBuilder arguments, int timeout = DefaultTimeoutMs)
+        {
+            try
             {
-                try
-                {
-                    filePath = filePath.MakeAbsolute(_Environment.WorkingDirectory);
+                // Start Runner
+                filePath = filePath.MakeAbsolute(_Environment.WorkingDirectory);
 
-                    _Runner.Start(filePath, new ProcessSettings()
-                            {
-                                Arguments = arguments
-                            })
-                            .WaitForExit(timeout);
-                }
-                catch (Exception ex)
-                {
-                    if (!(ex is TimeoutException)) throw;
+                IProcess process = _Runner.Start(filePath, new ProcessSettings()
+                        {
+                            Arguments = arguments,
+                            RedirectStandardError = true
+                        });
 
-                    _Log.Warning("Process timed out!");
+                process.WaitForExit(timeout);
+
+
+
+                // Check for Errors
+                IEnumerable<string> errors = process.GetStandardError();
+
+                if (errors.Count() > 0)
+                {
+                    throw new Exception(string.Join(",", errors));
                 }
             }
-        
-            /// <summary>
-            /// Installs a Topshelf windows service
-            /// </summary>
-            /// <param name="filePath">The file path of the Topshelf executable to install.</param>
-            /// <param name="settings">The <see cref="TopshelfSettings"/> used to install the service.</param>
-            public void InstallService(FilePath filePath, TopshelfSettings settings = null)
+            catch (Exception ex)
             {
-                if (filePath == null)
-                {
-                    throw new ArgumentNullException("filePath");
-                }
+                if (!(ex is TimeoutException)) throw;
 
-                int timeout = DefaultTimeoutMs;
-                if (settings != null)
-                {
-                    timeout = settings.Timeout;
-                }
+                _Log.Warning("Process timed out!");
+            }
+        }
 
-                this.ExecuteProcess(filePath, InstallArgumentsFactory.Create(settings), timeout);
-
-                _Log.Verbose("Topshelf service installed.");
+        /// <summary>
+        /// Installs a Topshelf windows service
+        /// </summary>
+        /// <param name="filePath">The file path of the Topshelf executable to install.</param>
+        /// <param name="settings">The <see cref="TopshelfSettings"/> used to install the service.</param>
+        public void InstallService(FilePath filePath, TopshelfSettings settings = null)
+        {
+            if (filePath == null)
+            {
+                throw new ArgumentNullException("filePath");
             }
 
-            /// <summary>
-            /// Uninstalls a Topshelf windows service
-            /// </summary>
-            /// <param name="filePath">The file path of the Topshelf executable to uninstall.</param>
-            /// <param name="instance">The instance name of the service to uninstall.</param>
-            /// <param name="timeout">The time in milliseconds to wait for the Topshelf executable.</param>
-            public void UninstallService(FilePath filePath, string instance = null, int timeout = DefaultTimeoutMs)
+            int timeout = TopshelfManager.DefaultTimeoutMs;
+            if (settings != null)
             {
-                if (filePath == null)
-                {
-                    throw new ArgumentNullException("filePath");
-                }
-
-                this.ExecuteProcess(filePath, new ProcessArgumentBuilder().Append("uninstall " + (instance ?? "")), timeout);
-
-                _Log.Verbose("Topshelf service uninstalled.");
+                timeout = settings.Timeout;
             }
 
+            this.ExecuteProcess(filePath, InstallArgumentsFactory.Create(settings), timeout);
 
+            _Log.Verbose("Topshelf service installed.");
+        }
 
-            /// <summary>
-            /// Starts a Topshelf windows service
-            /// </summary>
-            /// <param name="filePath">The file path of the Topshelf executable to start.</param>
-            /// <param name="instance">The instance name of the service to start.</param>
-            /// <param name="timeout">The time in milliseconds to wait for the Topshelf executable.</param>
-            public void StartService(FilePath filePath, string instance = null, int timeout = DefaultTimeoutMs)
+        /// <summary>
+        /// Uninstalls a Topshelf windows service
+        /// </summary>
+        /// <param name="filePath">The file path of the Topshelf executable to uninstall.</param>
+        /// <param name="instance">The instance name of the service to uninstall.</param>
+        /// <param name="timeout">The time in milliseconds to wait for the Topshelf executable.</param>
+        public void UninstallService(FilePath filePath, string instance = null, int timeout = DefaultTimeoutMs)
+        {
+            if (filePath == null)
             {
-                if (filePath == null)
-                {
-                    throw new ArgumentNullException("filePath");
-                }
-
-                this.ExecuteProcess(filePath, new ProcessArgumentBuilder().Append("start " + (instance ?? "")), timeout);
-
-                _Log.Verbose("Topshelf service started.");
+                throw new ArgumentNullException("filePath");
             }
 
-            /// <summary>
-            /// Stops a Topshelf windows service
-            /// </summary>
-            /// <param name="filePath">The file path of the Topshelf executable to stop.</param>
-            /// <param name="instance">The instance name of the service to stop.</param>
-            /// <param name="timeout">The time in milliseconds to wait for the Topshelf executable.</param>
-            public void StopService(FilePath filePath, string instance = null, int timeout = DefaultTimeoutMs)
+            this.ExecuteProcess(filePath, new ProcessArgumentBuilder().Append("uninstall " + (instance ?? "")), timeout);
+
+            _Log.Verbose("Topshelf service uninstalled.");
+        }
+
+
+
+        /// <summary>
+        /// Starts a Topshelf windows service
+        /// </summary>
+        /// <param name="filePath">The file path of the Topshelf executable to start.</param>
+        /// <param name="instance">The instance name of the service to start.</param>
+        /// <param name="timeout">The time in milliseconds to wait for the Topshelf executable.</param>
+        public void StartService(FilePath filePath, string instance = null, int timeout = DefaultTimeoutMs)
+        {
+            if (filePath == null)
             {
-                if (filePath == null)
-                {
-                    throw new ArgumentNullException("filePath");
-                }
-
-                this.ExecuteProcess(filePath, new ProcessArgumentBuilder().Append("stop " + (instance ?? "")), timeout);
-
-                _Log.Verbose("Topshelf service stopped.");
+                throw new ArgumentNullException("filePath");
             }
+
+            this.ExecuteProcess(filePath, new ProcessArgumentBuilder().Append("start " + (instance ?? "")), timeout);
+
+            _Log.Verbose("Topshelf service started.");
+        }
+
+        /// <summary>
+        /// Stops a Topshelf windows service
+        /// </summary>
+        /// <param name="filePath">The file path of the Topshelf executable to stop.</param>
+        /// <param name="instance">The instance name of the service to stop.</param>
+        /// <param name="timeout">The time in milliseconds to wait for the Topshelf executable.</param>
+        public void StopService(FilePath filePath, string instance = null, int timeout = DefaultTimeoutMs)
+        {
+            if (filePath == null)
+            {
+                throw new ArgumentNullException("filePath");
+            }
+
+            this.ExecuteProcess(filePath, new ProcessArgumentBuilder().Append("stop " + (instance ?? "")), timeout);
+
+            _Log.Verbose("Topshelf service stopped.");
+        }
         #endregion
     }
 }

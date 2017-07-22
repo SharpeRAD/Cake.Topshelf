@@ -1,7 +1,7 @@
 ﻿#region Using Statements
-    using Cake.Core;
-    using Cake.Core.IO;
-    using Cake.Core.Annotations;
+using Cake.Core;
+using Cake.Core.IO;
+using Cake.Core.Annotations;
 #endregion
 
 
@@ -14,6 +14,7 @@ namespace Cake.Topshelf
     [CakeAliasCategory("Topshelf")]
     public static class TopshelfAliases
     {
+        #region Methods (12)
         private static ITopshelfManager CreateManager(this ICakeContext context)
         {
             return new TopshelfManager(context.Environment, context.ProcessRunner, context.Log);
@@ -157,5 +158,6 @@ namespace Cake.Topshelf
         {
             context.CreateManager().StopService(filePath, instance, timeout);
         }
+        #endregion
     }
 }

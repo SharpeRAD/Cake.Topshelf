@@ -1,11 +1,11 @@
 ﻿#region Using Statements
-    using System.IO;
+using System.IO;
 
-    using Cake.Core;
-    using Cake.Core.IO;
-    using Cake.Core.Diagnostics;
+using Cake.Core;
+using Cake.Core.IO;
+using Cake.Core.Diagnostics;
 
-    using NSubstitute;
+using NSubstitute;
 #endregion
 
 
@@ -14,24 +14,24 @@ namespace Cake.Topshelf.Tests
 {
     internal static class CakeHelper
     {
-        #region Functions (2)
-            public static ICakeEnvironment CreateEnvironment()
-            {
-                var environment = Substitute.For<ICakeEnvironment>();
-                environment.WorkingDirectory = Directory.GetCurrentDirectory();
+        #region Methods (2)
+        public static ICakeEnvironment CreateEnvironment()
+        {
+            var environment = Substitute.For<ICakeEnvironment>();
+            environment.WorkingDirectory = Directory.GetCurrentDirectory();
 
-                return environment;
-            }
+            return environment;
+        }
 
 
 
-            public static ITopshelfManager CreateTransferManager()
-            {
-                ICakeEnvironment enviroment = CakeHelper.CreateEnvironment();
-                ICakeLog log = new DebugLog();
+        public static ITopshelfManager CreateTransferManager()
+        {
+            ICakeEnvironment enviroment = CakeHelper.CreateEnvironment();
+            ICakeLog log = new DebugLog();
 
-                return new TopshelfManager(enviroment, new ProcessRunner(enviroment, log), log);
-            }
+            return new TopshelfManager(enviroment, new ProcessRunner(enviroment, log), log);
+        }
         #endregion
     }
 }

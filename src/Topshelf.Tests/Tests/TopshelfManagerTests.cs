@@ -1,21 +1,31 @@
-﻿using System.Configuration;
+﻿#region Using Statements
 using Cake.Core.IO;
+
 using FluentAssertions;
 using NSubstitute;
 using Xunit;
-using Xunit.Sdk;
+#endregion
+
+
 
 namespace Cake.Topshelf.Tests.Manager
 {
     public class TopshelfManagerTests
     {
+        #region Fields (5)
         private readonly DebugLog _debugLog;
         private readonly IProcessRunner _processRunner;
         private readonly IProcess _process;
         private ProcessSettings _processSettingsPassed;
 
         const int ExpectedDefaultTimeoutMs = 60000;
+        #endregion
 
+
+
+
+
+        #region Constructors (1)
         public TopshelfManagerTests()
         {
             _debugLog = new DebugLog();
@@ -28,7 +38,13 @@ namespace Cake.Topshelf.Tests.Manager
                    _processSettingsPassed = callinfo.Arg<ProcessSettings>();
                });
         }
+        #endregion
 
+
+
+
+
+        #region Methods (23)
         private TopshelfManager CreateSut()
         {
             return new TopshelfManager(
@@ -313,5 +329,6 @@ namespace Cake.Topshelf.Tests.Manager
             _process.Received()
                 .WaitForExit(100);
         }
+        #endregion
     }
 }

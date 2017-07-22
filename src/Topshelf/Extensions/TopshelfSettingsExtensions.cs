@@ -1,7 +1,7 @@
 ﻿#region Using Statements
-    using System;
+using System;
 
-    using Cake.Core.IO;
+using Cake.Core.IO;
 #endregion
 
 
@@ -13,6 +13,7 @@ namespace Cake.Topshelf
     /// </summary>
     public static class TopshelfSettingsExtensions
     {
+        #region Methods (15)
         /// <summary>
         /// Sets the arguments to use during installation
         /// </summary>
@@ -265,5 +266,6 @@ namespace Cake.Topshelf
             settings.NetworkService = networkService;
             return settings;
         }
+        #endregion
     }
 }

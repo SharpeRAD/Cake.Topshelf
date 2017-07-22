@@ -1,10 +1,15 @@
+#region Using Statements
 using Cake.Core.IO;
 using Cake.Core.IO.Arguments;
+#endregion
+
+
 
 namespace Cake.Topshelf
 {
     internal static class InstallArgumentsFactory
     {
+        #region Methods (16)
         public static ProcessArgumentBuilder Create(TopshelfSettings settings)
         {
             var builder = UseExistingArgumentsIfSupplied(settings);
@@ -29,6 +34,20 @@ namespace Cake.Topshelf
 
             return builder;
         }
+        
+        private static ProcessArgumentBuilder UseExistingArgumentsIfSupplied(TopshelfSettings settings)
+        {
+            ProcessArgumentBuilder builder = new ProcessArgumentBuilder();
+
+            if ((settings != null) && (settings.Arguments != null))
+            {
+                builder = settings.Arguments;
+            }
+
+            return builder;
+        }
+
+
 
         private static void AppendDisplayname(TopshelfSettings settings, ProcessArgumentBuilder builder)
         {
@@ -127,18 +146,6 @@ namespace Cake.Topshelf
             builder.Append(new TextArgument("install"));
         }
 
-        private static ProcessArgumentBuilder UseExistingArgumentsIfSupplied(TopshelfSettings settings)
-        {
-            ProcessArgumentBuilder builder = new ProcessArgumentBuilder();
-
-            if ((settings != null) && (settings.Arguments != null))
-            {
-                builder = settings.Arguments;
-            }
-
-            return builder;
-        }
-
         private static void AppendUserName(TopshelfSettings settings, ProcessArgumentBuilder builder)
         {
             if (!string.IsNullOrWhiteSpace(settings.Username))
@@ -147,5 +154,6 @@ namespace Cake.Topshelf
                 builder.Append(new QuotedArgument(new TextArgument(settings.Username)));
             }
         }
+        #endregion
     }
 }
