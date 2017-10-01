@@ -17,7 +17,7 @@ namespace Cake.Topshelf
     /// </summary>
     public class TopshelfManager : ITopshelfManager
     {
-        #region Fields (3)
+        #region Fields
         const int DefaultTimeoutMs = 60000;
 
         private readonly ICakeEnvironment _Environment;
@@ -29,7 +29,7 @@ namespace Cake.Topshelf
 
 
 
-        #region Constructor (1)
+        #region Constructor
         /// <summary>
         /// Initializes a new instance of the <see cref="TopshelfManager" /> class.
         /// </summary>
@@ -61,7 +61,7 @@ namespace Cake.Topshelf
 
 
 
-        #region Methods (6)
+        #region Methods
         private void ExecuteProcess(FilePath filePath, ProcessArgumentBuilder arguments, int timeout = DefaultTimeoutMs)
         {
             try

@@ -4,8 +4,7 @@ using System.IO;
 using Cake.Core;
 using Cake.Core.IO;
 using Cake.Core.Diagnostics;
-
-using NSubstitute;
+using Cake.Testing;
 #endregion
 
 
@@ -14,11 +13,12 @@ namespace Cake.Topshelf.Tests
 {
     internal static class CakeHelper
     {
-        #region Methods (2)
+        #region Methods
         public static ICakeEnvironment CreateEnvironment()
         {
-            var environment = Substitute.For<ICakeEnvironment>();
+            var environment = FakeEnvironment.CreateWindowsEnvironment();
             environment.WorkingDirectory = Directory.GetCurrentDirectory();
+            environment.WorkingDirectory = environment.WorkingDirectory.Combine("../../../");
 
             return environment;
         }

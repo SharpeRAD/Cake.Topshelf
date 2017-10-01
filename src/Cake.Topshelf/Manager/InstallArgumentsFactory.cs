@@ -9,7 +9,7 @@ namespace Cake.Topshelf
 {
     internal static class InstallArgumentsFactory
     {
-        #region Methods (16)
+        #region Methods
         public static ProcessArgumentBuilder Create(TopshelfSettings settings)
         {
             var builder = UseExistingArgumentsIfSupplied(settings);

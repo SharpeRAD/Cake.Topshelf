@@ -1,9 +1,9 @@
 ﻿#region Using Statements
 using Cake.Core.IO;
 
-using FluentAssertions;
 using NSubstitute;
 using Xunit;
+using Shouldly;
 #endregion
 
 
@@ -12,7 +12,7 @@ namespace Cake.Topshelf.Tests.Manager
 {
     public class TopshelfManagerTests
     {
-        #region Fields (5)
+        #region Fields
         private readonly DebugLog _debugLog;
         private readonly IProcessRunner _processRunner;
         private readonly IProcess _process;
@@ -25,7 +25,7 @@ namespace Cake.Topshelf.Tests.Manager
 
 
 
-        #region Constructors (1)
+        #region Constructors
         public TopshelfManagerTests()
         {
             _debugLog = new DebugLog();
@@ -44,7 +44,7 @@ namespace Cake.Topshelf.Tests.Manager
 
 
 
-        #region Methods (23)
+        #region Methods
         private TopshelfManager CreateSut()
         {
             return new TopshelfManager(
@@ -52,6 +52,8 @@ namespace Cake.Topshelf.Tests.Manager
                 _processRunner,
                 _debugLog);
         }
+
+
 
         [Fact]
         public void InstallService_WhenNoSettingsSupplied_ShouldUseDefaultTimeout()
@@ -82,7 +84,7 @@ namespace Cake.Topshelf.Tests.Manager
       
             sut.InstallService(new FilePath("SomePath"));
 
-            _processSettingsPassed.Arguments.Render().Should().Be("install");
+            _processSettingsPassed.Arguments.Render().ShouldBe("install");
         }
 
         [Fact]
@@ -95,7 +97,7 @@ namespace Cake.Topshelf.Tests.Manager
                 Autostart = true
             });
 
-            _processSettingsPassed.Arguments.Render().Should().Be("install --autostart");
+            _processSettingsPassed.Arguments.Render().ShouldBe("install --autostart");
         }
 
         [Fact]
@@ -108,7 +110,7 @@ namespace Cake.Topshelf.Tests.Manager
                 Autostart = false
             });
 
-            _processSettingsPassed.Arguments.Render().Should().Be("install --manual");
+            _processSettingsPassed.Arguments.Render().ShouldBe("install --manual");
         }
 
         [Fact]
@@ -121,8 +123,8 @@ namespace Cake.Topshelf.Tests.Manager
                 Delayed = true
             });
 
-            _processSettingsPassed.Arguments.Render().Should().StartWith("install ");
-            _processSettingsPassed.Arguments.Render().Should().Contain(" --delayed");
+            _processSettingsPassed.Arguments.Render().ShouldStartWith("install ");
+            _processSettingsPassed.Arguments.Render().ShouldContain(" --delayed");
         }
 
         [Fact]
@@ -135,8 +137,8 @@ namespace Cake.Topshelf.Tests.Manager
                 Username = "Nathan"
             });
 
-            _processSettingsPassed.Arguments.Render().Should().StartWith("install ");
-            _processSettingsPassed.Arguments.Render().Should().Contain(" -username \"Nathan\" ");
+            _processSettingsPassed.Arguments.Render().ShouldStartWith("install ");
+            _processSettingsPassed.Arguments.Render().ShouldContain(" -username \"Nathan\" ");
         }
 
         [Fact]
@@ -149,8 +151,8 @@ namespace Cake.Topshelf.Tests.Manager
                 Password = "foo"
             });
 
-            _processSettingsPassed.Arguments.Render().Should().StartWith("install ");
-            _processSettingsPassed.Arguments.Render().Should().Contain(" -password \"foo\" ");
+            _processSettingsPassed.Arguments.Render().ShouldStartWith("install ");
+            _processSettingsPassed.Arguments.Render().ShouldContain(" -password \"foo\" ");
         }
 
         [Fact]
@@ -163,8 +165,8 @@ namespace Cake.Topshelf.Tests.Manager
                 Instance = "bar"
             });
 
-            _processSettingsPassed.Arguments.Render().Should().StartWith("install ");
-            _processSettingsPassed.Arguments.Render().Should().Contain(" -instance \"bar\" ");
+            _processSettingsPassed.Arguments.Render().ShouldStartWith("install ");
+            _processSettingsPassed.Arguments.Render().ShouldContain(" -instance \"bar\" ");
         }
 
         [Fact]
@@ -177,8 +179,8 @@ namespace Cake.Topshelf.Tests.Manager
                 Disabled = true
             });
 
-            _processSettingsPassed.Arguments.Render().Should().StartWith("install ");
-            _processSettingsPassed.Arguments.Render().Should().Contain(" --disabled");
+            _processSettingsPassed.Arguments.Render().ShouldStartWith("install ");
+            _processSettingsPassed.Arguments.Render().ShouldContain(" --disabled");
         }
 
         [Fact]
@@ -191,8 +193,8 @@ namespace Cake.Topshelf.Tests.Manager
                 LocalSystem = true
             });
 
-            _processSettingsPassed.Arguments.Render().Should().StartWith("install ");
-            _processSettingsPassed.Arguments.Render().Should().Contain(" --localsystem");
+            _processSettingsPassed.Arguments.Render().ShouldStartWith("install ");
+            _processSettingsPassed.Arguments.Render().ShouldContain(" --localsystem");
         }
 
         [Fact]
@@ -205,8 +207,8 @@ namespace Cake.Topshelf.Tests.Manager
                 LocalService = true
             });
 
-            _processSettingsPassed.Arguments.Render().Should().StartWith("install ");
-            _processSettingsPassed.Arguments.Render().Should().Contain(" --localservice");
+            _processSettingsPassed.Arguments.Render().ShouldStartWith("install ");
+            _processSettingsPassed.Arguments.Render().ShouldContain(" --localservice");
         }
 
         [Fact]
@@ -219,8 +221,8 @@ namespace Cake.Topshelf.Tests.Manager
                 NetworkService = true
             });
 
-            _processSettingsPassed.Arguments.Render().Should().StartWith("install ");
-            _processSettingsPassed.Arguments.Render().Should().Contain(" --networkservice");
+            _processSettingsPassed.Arguments.Render().ShouldStartWith("install ");
+            _processSettingsPassed.Arguments.Render().ShouldContain(" --networkservice");
         }
 
         [Fact]
@@ -233,8 +235,8 @@ namespace Cake.Topshelf.Tests.Manager
                 ServiceName = "Terminator"
             });
 
-            _processSettingsPassed.Arguments.Render().Should().StartWith("install ");
-            _processSettingsPassed.Arguments.Render().Should().Contain(" -servicename \"Terminator\"");
+            _processSettingsPassed.Arguments.Render().ShouldStartWith("install ");
+            _processSettingsPassed.Arguments.Render().ShouldContain(" -servicename \"Terminator\"");
         }
 
         [Fact]
@@ -247,8 +249,8 @@ namespace Cake.Topshelf.Tests.Manager
                 Description = "SomeDescription"
             });
 
-            _processSettingsPassed.Arguments.Render().Should().StartWith("install ");
-            _processSettingsPassed.Arguments.Render().Should().Contain(" -description \"SomeDescription\"");
+            _processSettingsPassed.Arguments.Render().ShouldStartWith("install ");
+            _processSettingsPassed.Arguments.Render().ShouldContain(" -description \"SomeDescription\"");
         }
 
         [Fact]
@@ -261,8 +263,8 @@ namespace Cake.Topshelf.Tests.Manager
                 DisplayName = "SomeDisplayName"
             });
 
-            _processSettingsPassed.Arguments.Render().Should().StartWith("install ");
-            _processSettingsPassed.Arguments.Render().Should().Contain(" -displayname \"SomeDisplayName\"");
+            _processSettingsPassed.Arguments.Render().ShouldStartWith("install ");
+            _processSettingsPassed.Arguments.Render().ShouldContain(" -displayname \"SomeDisplayName\"");
         }
         [Fact]
         public void UninstallService_WhenNoSettingsSupplied_ShouldUseDefaultTimeout()
@@ -272,7 +274,7 @@ namespace Cake.Topshelf.Tests.Manager
             sut.UninstallService(new FilePath("SomePath"));
 
             _process.Received()
-                .WaitForExit(ExpectedDefaultTimeoutMs);
+                    .WaitForExit(ExpectedDefaultTimeoutMs);
         }
 
         [Fact]
@@ -283,7 +285,7 @@ namespace Cake.Topshelf.Tests.Manager
             sut.UninstallService(new FilePath("SomePath"), timeout: 100);
 
             _process.Received()
-                .WaitForExit(100);
+                    .WaitForExit(100);
         }
 
         [Fact]
@@ -294,7 +296,7 @@ namespace Cake.Topshelf.Tests.Manager
             sut.StartService(new FilePath("SomePath"));
 
             _process.Received()
-                .WaitForExit(ExpectedDefaultTimeoutMs);
+                    .WaitForExit(ExpectedDefaultTimeoutMs);
         }
 
         [Fact]
@@ -305,7 +307,7 @@ namespace Cake.Topshelf.Tests.Manager
             sut.StartService(new FilePath("SomePath"), timeout: 100);
 
             _process.Received()
-                .WaitForExit(100);
+                    .WaitForExit(100);
         }
 
         [Fact]
@@ -316,7 +318,7 @@ namespace Cake.Topshelf.Tests.Manager
             sut.StopService(new FilePath("SomePath"));
 
             _process.Received()
-                .WaitForExit(ExpectedDefaultTimeoutMs);
+                    .WaitForExit(ExpectedDefaultTimeoutMs);
         }
 
         [Fact]
@@ -327,7 +329,7 @@ namespace Cake.Topshelf.Tests.Manager
             sut.StopService(new FilePath("SomePath"), timeout: 100);
 
             _process.Received()
-                .WaitForExit(100);
+                    .WaitForExit(100);
         }
         #endregion
     }

@@ -13,7 +13,7 @@ namespace Cake.Topshelf
     /// </summary>
     public static class TopshelfSettingsExtensions
     {
-        #region Methods (15)
+        #region Methods
         /// <summary>
         /// Sets the arguments to use during installation
         /// </summary>

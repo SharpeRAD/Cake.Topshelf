@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <AssemblyTitle>Cake.Topshelf</AssemblyTitle>
+        <AssemblyName>Cake.Topshelf</AssemblyName>
+        <PackageId>Cake.Topshelf</PackageId>
+        <OutputType>Library</OutputType>
+
+        <TargetFrameworks>net461;</TargetFrameworks>
+
+        <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
+        <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
+        <GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
+        <GenerateAssemblyInformationalVersionAttribute>false</GenerateAssemblyInformationalVersionAttribute>
+        <GenerateAssemblyCopyrightAttribute>false</GenerateAssemblyCopyrightAttribute>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <DocumentationFile>bin\Debug\net461\Cake.Topshelf.xml</DocumentationFile>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Cake.Core" Version="0.22.0" />
+    </ItemGroup>
+</Project>

@@ -14,7 +14,7 @@ namespace Cake.Topshelf
     [CakeAliasCategory("Topshelf")]
     public static class TopshelfAliases
     {
-        #region Methods (12)
+        #region Methods
         private static ITopshelfManager CreateManager(this ICakeContext context)
         {
             return new TopshelfManager(context.Environment, context.ProcessRunner, context.Log);

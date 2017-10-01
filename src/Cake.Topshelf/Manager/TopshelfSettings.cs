@@ -11,7 +11,7 @@ namespace Cake.Topshelf
     /// </summary>
     public class TopshelfSettings
     {
-        #region Constructor (1)
+        #region Constructor
         /// <summary>
         /// Initializes a new instance of the <see cref="TopshelfSettings" /> class.
         /// </summary>
@@ -25,7 +25,7 @@ namespace Cake.Topshelf
 
 
 
-        #region Properties (14)
+        #region Properties
         /// <summary>
         /// Sets the arguments to use during installation
         /// </summary>

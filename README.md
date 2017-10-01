@@ -115,6 +115,12 @@ A complete Cake example can be found [here](https://github.com/SharpeRAD/Cake.To
 
 
 
+## TroubleShooting
+
+* Please be aware of the breaking changes that occurred with the release of [Cake v0.22.0](https://cakebuild.net/blog/2017/09/cake-v0.22.0-released), you will need to upgrade Cake in order to use Cake.Topshelf v0.2.0 or above.
+
+
+
 ## Plays well with
 
 If your looking to manage standard windows services or just looking for more related aliases its worth checking out [Cake.Services](https://github.com/SharpeRAD/Cake.Services).

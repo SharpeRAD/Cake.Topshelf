@@ -11,7 +11,7 @@ namespace Cake.Topshelf
     /// </summary>
     public interface ITopshelfManager
     {
-        #region Methods (4)
+        #region Methods
         /// <summary>
         /// Installs a Topshelf windows service
         /// </summary>
