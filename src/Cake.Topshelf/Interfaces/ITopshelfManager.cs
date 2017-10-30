@@ -24,8 +24,9 @@ namespace Cake.Topshelf
         /// </summary>
         /// <param name="filePath">The file path of the Topshelf executable to uninstall.</param>
         /// <param name="instance">The instance name of the service to uninstall.</param>
+        /// <param name="sudo">Prompts for UAC if running on Vista/W7/2008</param>
         /// <param name="timeout">The time in milliseconds to wait for the Topshelf executable.</param>
-        void UninstallService(FilePath filePath, string instance = null, int timeout = 60000);
+        void UninstallService(FilePath filePath, string instance = null, bool sudo = false, int timeout = 60000);
 
 
 

@@ -76,11 +76,25 @@ namespace Cake.Topshelf
         /// <param name="context">The cake context.</param>
         /// <param name="filePath">The file path of the Topshelf executable to uninstall.</param>
         /// <param name="instance">The instance name of the service to uninstall.</param>
+        /// <param name="sudo">Prompts for UAC if running on Vista/W7/2008</param>
+        [CakeMethodAlias]
+        public static void UninstallTopshelf(this ICakeContext context, FilePath filePath, string instance, bool sudo)
+        {
+            context.CreateManager().UninstallService(filePath, instance, sudo);
+        }
+
+        /// <summary>
+        /// Uninstalls a Topshelf windows service
+        /// </summary>
+        /// <param name="context">The cake context.</param>
+        /// <param name="filePath">The file path of the Topshelf executable to uninstall.</param>
+        /// <param name="instance">The instance name of the service to uninstall.</param>
+        /// <param name="sudo">Prompts for UAC if running on Vista/W7/2008</param>
         /// <param name="timeout">The time in milliseconds to wait for the Topshelf executable.</param>
         [CakeMethodAlias]
-        public static void UninstallTopshelf(this ICakeContext context, FilePath filePath, string instance, int timeout)
+        public static void UninstallTopshelf(this ICakeContext context, FilePath filePath, string instance, bool sudo, int timeout)
         {
-            context.CreateManager().UninstallService(filePath, instance, timeout);
+            context.CreateManager().UninstallService(filePath, instance, sudo, timeout);
         }
 
 

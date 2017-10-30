@@ -1,30 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <package xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-   <metadata xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
-      <id>Cake.Topshelf</id>
-      <version>0.0.0</version>
-      <authors>Phillip Sharpe</authors>
-      <owners>Phillip Sharpe</owners>
-      <title>Cake.Topshelf</title>
-      <description>Cake Build addon for managing Topshelf services.</description>
-      <summary>Topshelf addon for cake build.</summary>
-      <licenseUrl>https://github.com/SharpeRAD/Cake.Topshelf/LICENSE</licenseUrl>
-      <projectUrl>https://github.com/SharpeRAD/Cake.Topshelf</projectUrl>
-      <iconUrl>https://cdn.rawgit.com/cake-contrib/graphics/a5cf0f881c390650144b2243ae551d5b9f836196/png/cake-contrib-medium.png</iconUrl>
-      <requireLicenseAcceptance>false</requireLicenseAcceptance>
-      <copyright>Copyright (c) Phillip Sharpe 2015</copyright>
-      <releaseNotes>Initial Release</releaseNotes>
-      <tags>Cake Script Build Topshelf Windows Service</tags>
+    <metadata xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+        <id>Cake.Topshelf</id>
+        <version>0.0.0</version>
+        <authors>Phillip Sharpe</authors>
+        <owners>Phillip Sharpe</owners>
+        <title>Cake.Topshelf</title>
+        <description>Cake Build addon for managing Topshelf services.</description>
+        <summary>Topshelf addon for cake build.</summary>
+        <licenseUrl>https://github.com/SharpeRAD/Cake.Topshelf/LICENSE</licenseUrl>
+        <projectUrl>https://github.com/SharpeRAD/Cake.Topshelf</projectUrl>
+        <iconUrl>https://cdn.rawgit.com/cake-contrib/graphics/a5cf0f881c390650144b2243ae551d5b9f836196/png/cake-contrib-medium.png</iconUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <copyright>Copyright (c) Phillip Sharpe 2015</copyright>
+        <releaseNotes>Initial Release</releaseNotes>
+        <tags>Cake Script Build Topshelf Windows Service</tags>
 
-       <dependencies>
-           <dependency id="Cake.Core" version="0.22.0" />
-       </dependencies>
-   </metadata>
+        <dependencies>
+            <dependency id="Cake.Core" version="0.22.0" />
+        </dependencies>
+    </metadata>
 
-   <files>
-      <file src="net461/Cake.Topshelf.dll" target="lib/net461" />
-      <file src="net461/Cake.Topshelf.xml" target="lib/net461" />
-       
-      <file src="LICENSE" />
-   </files>
+    <files>
+        <file src="net46/Cake.Topshelf.dll" target="lib/net46" />
+        <file src="net46/Cake.Topshelf.xml" target="lib/net46" />
+
+        <file src="netstandard1.6/Cake.Topshelf.dll" target="lib/netstandard1.6" />
+        <file src="netstandard1.6/Cake.Topshelf.xml" target="lib/netstandard1.6" />
+        <file src="netstandard1.6/Cake.Topshelf.pdb" target="lib/netstandard1.6" />
+        <file src="netstandard1.6/Cake.Topshelf.deps.json" target="lib/netstandard1.6" />
+
+        <file src="LICENSE" />
+    </files>
 </package>

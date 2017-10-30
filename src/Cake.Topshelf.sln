@@ -15,6 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{409BC6DA
 		..\.gitignore = ..\.gitignore
 		..\appveyor.yml = ..\appveyor.yml
 		..\build.cake = ..\build.cake
+		..\cake.config = ..\cake.config
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{04DD68ED-2973-4B5E-964B-9FA607BB218D}"
@@ -29,9 +30,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Nuget", "Nuget", "{3A8E8897
 		..\nuspec\Cake.Topshelf.nuspec = ..\nuspec\Cake.Topshelf.nuspec
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cake.Topshelf", "Cake.Topshelf\Cake.Topshelf.csproj", "{E0005CD4-AC36-47E4-B1A5-0A829E760599}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cake.Topshelf", "Cake.Topshelf\Cake.Topshelf.csproj", "{E0005CD4-AC36-47E4-B1A5-0A829E760599}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cake.Topshelf.Tests", "Cake.Topshelf.Tests\Cake.Topshelf.Tests.csproj", "{BA73BF3F-555E-4135-B3B7-7FF8FB5C8D70}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cake.Topshelf.Tests", "Cake.Topshelf.Tests\Cake.Topshelf.Tests.csproj", "{BA73BF3F-555E-4135-B3B7-7FF8FB5C8D70}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

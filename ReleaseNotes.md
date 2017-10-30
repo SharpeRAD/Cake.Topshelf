@@ -1,3 +1,7 @@
+### New in 0.2.1 (Released 2017/10/30)
+* [Improvement] Move to net46 and netstandard1.6
+* [Bug] Not including -instance with start / stop commands
+
 ### New in 0.2.0 (Released 2017/10/01)
 * [Improvement] Updated Cake reference to v0.22.0
 * [Improvement] Moved to net461 for Cake compatibility
