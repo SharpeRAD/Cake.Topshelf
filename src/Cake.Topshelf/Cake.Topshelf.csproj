@@ -19,6 +19,10 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <Reference Include="netstandard" />
+    </ItemGroup>
+    
+    <ItemGroup>
         <PackageReference Include="Cake.Core" Version="0.26.0" />
     </ItemGroup>
 </Project>
