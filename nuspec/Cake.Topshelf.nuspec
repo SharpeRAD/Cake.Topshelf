@@ -17,13 +17,14 @@
         <tags>Cake Script Build Topshelf Windows Service</tags>
 
         <dependencies>
-            <dependency id="Cake.Core" version="0.22.0" />
+            <dependency id="Cake.Core" version="0.26.0" />
         </dependencies>
     </metadata>
 
     <files>
         <file src="net46/Cake.Topshelf.dll" target="lib/net46" />
         <file src="net46/Cake.Topshelf.xml" target="lib/net46" />
+        <file src="net46/Cake.Topshelf.pdb" target="lib/net46" />
 
         <file src="netstandard1.6/Cake.Topshelf.dll" target="lib/netstandard1.6" />
         <file src="netstandard1.6/Cake.Topshelf.xml" target="lib/netstandard1.6" />

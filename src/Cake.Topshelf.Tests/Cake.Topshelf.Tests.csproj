@@ -5,7 +5,7 @@
         <PackageId>Cake.Topshelf.Tests</PackageId>
         <OutputType>Library</OutputType>
 
-        <TargetFrameworks>net461</TargetFrameworks>
+        <TargetFrameworks>net46</TargetFrameworks>
 
         <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
         <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
@@ -19,8 +19,8 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Cake.Core" Version="0.22.0" />
-        <PackageReference Include="Cake.Testing" Version="0.22.0" />
+        <PackageReference Include="Cake.Core" Version="0.26.0" />
+        <PackageReference Include="Cake.Testing" Version="0.26.0" />
 
         <PackageReference Include="xunit" Version="2.2.0" />
         <PackageReference Include="xunit.runner.visualstudio" Version="2.2.0" />

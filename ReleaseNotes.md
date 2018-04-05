@@ -1,3 +1,6 @@
+### New in 0.2.2 (Released 2018/04/05)
+* [Improvement] Update to Cake.Core v0.26
+
 ### New in 0.2.1 (Released 2017/10/30)
 * [Improvement] Move to net46 and netstandard1.6
 * [Bug] Not including -instance with start / stop commands
