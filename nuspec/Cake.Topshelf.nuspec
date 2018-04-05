@@ -26,10 +26,10 @@
         <file src="net46/Cake.Topshelf.xml" target="lib/net46" />
         <file src="net46/Cake.Topshelf.pdb" target="lib/net46" />
 
-        <file src="netstandard1.6/Cake.Topshelf.dll" target="lib/netstandard1.6" />
-        <file src="netstandard1.6/Cake.Topshelf.xml" target="lib/netstandard1.6" />
-        <file src="netstandard1.6/Cake.Topshelf.pdb" target="lib/netstandard1.6" />
-        <file src="netstandard1.6/Cake.Topshelf.deps.json" target="lib/netstandard1.6" />
+        <file src="netstandard2.0/Cake.Topshelf.dll" target="lib/netstandard2.0" />
+        <file src="netstandard2.0/Cake.Topshelf.xml" target="lib/netstandard2.0" />
+        <file src="netstandard2.0/Cake.Topshelf.pdb" target="lib/netstandard2.0" />
+        <file src="netstandard2.0/Cake.Topshelf.deps.json" target="lib/netstandard2.0" />
 
         <file src="LICENSE" />
     </files>
