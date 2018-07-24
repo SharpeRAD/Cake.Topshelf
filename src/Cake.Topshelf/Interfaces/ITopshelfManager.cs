@@ -17,7 +17,8 @@ namespace Cake.Topshelf
         /// </summary>
         /// <param name="filePath">The file path of the Topshelf executable to install.</param>
         /// <param name="settings">The <see cref="TopshelfSettings"/> used to install the service.</param>
-        void InstallService(FilePath filePath, TopshelfSettings settings = null);
+        /// <returns>Return exit code of action</returns>
+        int InstallService(FilePath filePath, TopshelfSettings settings = null);
 
         /// <summary>
         /// Uninstalls a Topshelf windows service
@@ -26,9 +27,8 @@ namespace Cake.Topshelf
         /// <param name="instance">The instance name of the service to uninstall.</param>
         /// <param name="sudo">Prompts for UAC if running on Vista/W7/2008</param>
         /// <param name="timeout">The time in milliseconds to wait for the Topshelf executable.</param>
-        void UninstallService(FilePath filePath, string instance = null, bool sudo = false, int timeout = 60000);
-
-
+        /// <returns>Return exit code of action</returns>
+        int UninstallService(FilePath filePath, string instance = null, bool sudo = false, int timeout = 60000);
 
         /// <summary>
         /// Starts a Topshelf windows service
@@ -36,7 +36,8 @@ namespace Cake.Topshelf
         /// <param name="filePath">The file path of the Topshelf executable to start.</param>
         /// <param name="instance">The instance name of the service to start.</param>
         /// <param name="timeout">The time in milliseconds to wait for the Topshelf executable.</param>
-        void StartService(FilePath filePath, string instance = null, int timeout = 60000);
+        /// /// <returns>Return exit code of action</returns>
+        int StartService(FilePath filePath, string instance = null, int timeout = 60000);
 
         /// <summary>
         /// Stops a Topshelf windows service
@@ -44,7 +45,8 @@ namespace Cake.Topshelf
         /// <param name="filePath">The file path of the Topshelf executable to stop.</param>
         /// <param name="instance">The instance name of the service to stop.</param>
         /// <param name="timeout">The time in milliseconds to wait for the Topshelf executable.</param>
-        void StopService(FilePath filePath, string instance = null, int timeout = 60000);
+        /// <returns>Return exit code of action</returns>
+        int StopService(FilePath filePath, string instance = null, int timeout = 60000);
         #endregion
     }
 }

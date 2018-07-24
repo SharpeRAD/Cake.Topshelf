@@ -63,7 +63,7 @@ namespace Cake.Topshelf
 
 
         #region Methods
-        private void ExecuteProcess(FilePath filePath, ProcessArgumentBuilder arguments, int timeout = DefaultTimeoutMs)
+        private int ExecuteProcess(FilePath filePath, ProcessArgumentBuilder arguments, int timeout = DefaultTimeoutMs)
         {
             try
             {
@@ -78,15 +78,15 @@ namespace Cake.Topshelf
 
                 process.WaitForExit(timeout);
 
-
-
                 // Check for Errors
                 IEnumerable<string> errors = process.GetStandardError();
 
-                if (errors.Count() > 0)
+                if (errors.Any())
                 {
                     throw new Exception(string.Join(",", errors));
                 }
+
+                return process.GetExitCode();
             }
             catch (Exception ex)
             {
@@ -96,6 +96,8 @@ namespace Cake.Topshelf
                 }
 
                 _Log.Warning("Process timed out!");
+
+                return -1;
             }
         }
 
@@ -104,7 +106,7 @@ namespace Cake.Topshelf
         /// </summary>
         /// <param name="filePath">The file path of the Topshelf executable to install.</param>
         /// <param name="settings">The <see cref="TopshelfSettings"/> used to install the service.</param>
-        public void InstallService(FilePath filePath, TopshelfSettings settings = null)
+        public int InstallService(FilePath filePath, TopshelfSettings settings = null)
         {
             if (filePath == null)
             {
@@ -117,9 +119,11 @@ namespace Cake.Topshelf
                 timeout = settings.Timeout;
             }
 
-            this.ExecuteProcess(filePath, settings.GetArguments(), timeout);
+            var exitCode = this.ExecuteProcess(filePath, settings.GetArguments(), timeout);
 
             _Log.Verbose("Topshelf service installed.");
+
+            return exitCode;
         }
 
         /// <summary>
@@ -129,16 +133,18 @@ namespace Cake.Topshelf
         /// <param name="instance">The instance name of the service to uninstall.</param>
         /// <param name="sudo">Prompts for UAC if running on Vista/W7/2008</param>
         /// <param name="timeout">The time in milliseconds to wait for the Topshelf executable.</param>
-        public void UninstallService(FilePath filePath, string instance = null, bool sudo = false, int timeout = DefaultTimeoutMs)
+        public int UninstallService(FilePath filePath, string instance = null, bool sudo = false, int timeout = DefaultTimeoutMs)
         {
             if (filePath == null)
             {
                 throw new ArgumentNullException("filePath");
             }
 
-            this.ExecuteProcess(filePath, new ProcessArgumentBuilder().AppendText("uninstall").AppendInstance(instance).AppendSudo(sudo), timeout);
+            var exitCode =  this.ExecuteProcess(filePath, new ProcessArgumentBuilder().AppendText("uninstall").AppendInstance(instance).AppendSudo(sudo), timeout);
 
             _Log.Verbose("Topshelf service uninstalled.");
+
+            return exitCode;
         }
 
 
@@ -149,16 +155,18 @@ namespace Cake.Topshelf
         /// <param name="filePath">The file path of the Topshelf executable to start.</param>
         /// <param name="instance">The instance name of the service to start.</param>
         /// <param name="timeout">The time in milliseconds to wait for the Topshelf executable.</param>
-        public void StartService(FilePath filePath, string instance = null, int timeout = DefaultTimeoutMs)
+        public int StartService(FilePath filePath, string instance = null, int timeout = DefaultTimeoutMs)
         {
             if (filePath == null)
             {
                 throw new ArgumentNullException("filePath");
             }
 
-            this.ExecuteProcess(filePath, new ProcessArgumentBuilder().AppendText("start").AppendInstance(instance), timeout);
+            var exitCode = this.ExecuteProcess(filePath, new ProcessArgumentBuilder().AppendText("start").AppendInstance(instance), timeout);
 
             _Log.Verbose("Topshelf service started.");
+
+            return exitCode;
         }
 
         /// <summary>
@@ -167,16 +175,18 @@ namespace Cake.Topshelf
         /// <param name="filePath">The file path of the Topshelf executable to stop.</param>
         /// <param name="instance">The instance name of the service to stop.</param>
         /// <param name="timeout">The time in milliseconds to wait for the Topshelf executable.</param>
-        public void StopService(FilePath filePath, string instance = null, int timeout = DefaultTimeoutMs)
+        public int StopService(FilePath filePath, string instance = null, int timeout = DefaultTimeoutMs)
         {
             if (filePath == null)
             {
                 throw new ArgumentNullException("filePath");
             }
 
-            this.ExecuteProcess(filePath, new ProcessArgumentBuilder().AppendText("stop").AppendInstance(instance), timeout);
+            var exitCode = this.ExecuteProcess(filePath, new ProcessArgumentBuilder().AppendText("stop").AppendInstance(instance), timeout);
 
             _Log.Verbose("Topshelf service stopped.");
+
+            return exitCode;
         }
         #endregion
     }

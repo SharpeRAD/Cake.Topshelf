@@ -27,10 +27,11 @@ namespace Cake.Topshelf
         /// </summary>
         /// <param name="context">The cake context.</param>
         /// <param name="filePath">The file path of the Topshelf executable to install.</param>
+        /// <returns>Return exit code of action</returns>
         [CakeMethodAlias]
-        public static void InstallTopshelf(this ICakeContext context, FilePath filePath)
+        public static int InstallTopshelf(this ICakeContext context, FilePath filePath)
         {
-            context.CreateManager().InstallService(filePath, null);
+            return context.CreateManager().InstallService(filePath, null);
         }
 
         /// <summary>
@@ -39,23 +40,11 @@ namespace Cake.Topshelf
         /// <param name="context">The cake context.</param>
         /// <param name="filePath">The file path of the Topshelf executable to install.</param>
         /// <param name="settings">The <see cref="TopshelfSettings"/> used to install the service.</param>
+        /// <returns>Return exit code of action</returns>
         [CakeMethodAlias]
-        public static void InstallTopshelf(this ICakeContext context, FilePath filePath, TopshelfSettings settings)
+        public static int InstallTopshelf(this ICakeContext context, FilePath filePath, TopshelfSettings settings)
         {
-            context.CreateManager().InstallService(filePath, settings);
-        }
-
-
-
-        /// <summary>
-        /// Uninstalls a Topshelf windows service
-        /// </summary>
-        /// <param name="context">The cake context.</param>
-        /// <param name="filePath">The file path of the Topshelf executable to uninstall.</param>
-        [CakeMethodAlias]
-        public static void UninstallTopshelf(this ICakeContext context, FilePath filePath)
-        {
-            context.CreateManager().UninstallService(filePath);
+            return context.CreateManager().InstallService(filePath, settings);
         }
 
         /// <summary>
@@ -63,11 +52,11 @@ namespace Cake.Topshelf
         /// </summary>
         /// <param name="context">The cake context.</param>
         /// <param name="filePath">The file path of the Topshelf executable to uninstall.</param>
-        /// <param name="instance">The instance name of the service to uninstall.</param>
+        /// <returns>Return exit code of action</returns>
         [CakeMethodAlias]
-        public static void UninstallTopshelf(this ICakeContext context, FilePath filePath, string instance)
+        public static int UninstallTopshelf(this ICakeContext context, FilePath filePath)
         {
-            context.CreateManager().UninstallService(filePath, instance);
+            return context.CreateManager().UninstallService(filePath);
         }
 
         /// <summary>
@@ -76,11 +65,11 @@ namespace Cake.Topshelf
         /// <param name="context">The cake context.</param>
         /// <param name="filePath">The file path of the Topshelf executable to uninstall.</param>
         /// <param name="instance">The instance name of the service to uninstall.</param>
-        /// <param name="sudo">Prompts for UAC if running on Vista/W7/2008</param>
+        /// <returns>Return exit code of action</returns>
         [CakeMethodAlias]
-        public static void UninstallTopshelf(this ICakeContext context, FilePath filePath, string instance, bool sudo)
+        public static int UninstallTopshelf(this ICakeContext context, FilePath filePath, string instance)
         {
-            context.CreateManager().UninstallService(filePath, instance, sudo);
+            return context.CreateManager().UninstallService(filePath, instance);
         }
 
         /// <summary>
@@ -90,11 +79,26 @@ namespace Cake.Topshelf
         /// <param name="filePath">The file path of the Topshelf executable to uninstall.</param>
         /// <param name="instance">The instance name of the service to uninstall.</param>
         /// <param name="sudo">Prompts for UAC if running on Vista/W7/2008</param>
-        /// <param name="timeout">The time in milliseconds to wait for the Topshelf executable.</param>
+        /// <returns>Return exit code of action</returns>
         [CakeMethodAlias]
-        public static void UninstallTopshelf(this ICakeContext context, FilePath filePath, string instance, bool sudo, int timeout)
+        public static int UninstallTopshelf(this ICakeContext context, FilePath filePath, string instance, bool sudo)
         {
-            context.CreateManager().UninstallService(filePath, instance, sudo, timeout);
+            return context.CreateManager().UninstallService(filePath, instance, sudo);
+        }
+
+        /// <summary>
+        /// Uninstalls a Topshelf windows service
+        /// </summary>
+        /// <param name="context">The cake context.</param>
+        /// <param name="filePath">The file path of the Topshelf executable to uninstall.</param>
+        /// <param name="instance">The instance name of the service to uninstall.</param>
+        /// <param name="sudo">Prompts for UAC if running on Vista/W7/2008</param>
+        /// <param name="timeout">The time in milliseconds to wait for the Topshelf executable.</param>
+        /// <returns>Return exit code of action</returns>
+        [CakeMethodAlias]
+        public static int UninstallTopshelf(this ICakeContext context, FilePath filePath, string instance, bool sudo, int timeout)
+        {
+            return context.CreateManager().UninstallService(filePath, instance, sudo, timeout);
         }
 
 
@@ -104,10 +108,11 @@ namespace Cake.Topshelf
         /// </summary>
         /// <param name="context">The cake context.</param>
         /// <param name="filePath">The file path of the Topshelf executable to start.</param>
+        /// <returns>Return exit code of action</returns>
         [CakeMethodAlias]
-        public static void StartTopshelf(this ICakeContext context, FilePath filePath)
+        public static int StartTopshelf(this ICakeContext context, FilePath filePath)
         {
-            context.CreateManager().StartService(filePath);
+            return context.CreateManager().StartService(filePath);
         }
 
         /// <summary>
@@ -116,10 +121,11 @@ namespace Cake.Topshelf
         /// <param name="context">The cake context.</param>
         /// <param name="filePath">The file path of the Topshelf executable to start.</param>
         /// <param name="instance">The instance name of the service to start.</param>
+        /// <returns>Return exit code of action</returns>
         [CakeMethodAlias]
-        public static void StartTopshelf(this ICakeContext context, FilePath filePath, string instance)
+        public static int StartTopshelf(this ICakeContext context, FilePath filePath, string instance)
         {
-            context.CreateManager().StartService(filePath, instance);
+            return context.CreateManager().StartService(filePath, instance);
         }
 
         /// <summary>
@@ -129,10 +135,11 @@ namespace Cake.Topshelf
         /// <param name="filePath">The file path of the Topshelf executable to start.</param>
         /// <param name="instance">The instance name of the service to start.</param>
         /// <param name="timeout">The time in milliseconds to wait for the Topshelf executable.</param>
+        /// <returns>Return exit code of action</returns>
         [CakeMethodAlias]
-        public static void StartTopshelf(this ICakeContext context, FilePath filePath, string instance, int timeout)
+        public static int StartTopshelf(this ICakeContext context, FilePath filePath, string instance, int timeout)
         {
-            context.CreateManager().StartService(filePath, instance, timeout);
+            return context.CreateManager().StartService(filePath, instance, timeout);
         }
 
 
@@ -142,10 +149,11 @@ namespace Cake.Topshelf
         /// </summary>
         /// <param name="context">The cake context.</param>
         /// <param name="filePath">The file path of the Topshelf executable to stop.</param>
+        /// <returns>Return exit code of action</returns>
         [CakeMethodAlias]
-        public static void StopTopshelf(this ICakeContext context, FilePath filePath)
+        public static int StopTopshelf(this ICakeContext context, FilePath filePath)
         {
-            context.CreateManager().StopService(filePath);
+            return context.CreateManager().StopService(filePath);
         }
 
         /// <summary>
@@ -154,10 +162,11 @@ namespace Cake.Topshelf
         /// <param name="context">The cake context.</param>
         /// <param name="filePath">The file path of the Topshelf executable to stop.</param>
         /// <param name="instance">The instance name of the service to stop.</param>
+        /// <returns>Return exit code of action</returns>
         [CakeMethodAlias]
-        public static void StopTopshelf(this ICakeContext context, FilePath filePath, string instance)
+        public static int StopTopshelf(this ICakeContext context, FilePath filePath, string instance)
         {
-            context.CreateManager().StopService(filePath, instance);
+            return context.CreateManager().StopService(filePath, instance);
         }
 
         /// <summary>
@@ -167,10 +176,11 @@ namespace Cake.Topshelf
         /// <param name="filePath">The file path of the Topshelf executable to stop.</param>
         /// <param name="instance">The instance name of the service to stop.</param>
         /// <param name="timeout">The time in milliseconds to wait for the Topshelf executable.</param>
+        /// <returns>Return exit code of action</returns>
         [CakeMethodAlias]
-        public static void StopTopshelf(this ICakeContext context, FilePath filePath, string instance, int timeout)
+        public static int StopTopshelf(this ICakeContext context, FilePath filePath, string instance, int timeout)
         {
-            context.CreateManager().StopService(filePath, instance, timeout);
+            return context.CreateManager().StopService(filePath, instance, timeout);
         }
         #endregion
     }
