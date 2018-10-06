@@ -1,4 +1,8 @@
+#region Using Statements
 using System;
+#endregion
+
+
 
 namespace Cake.Topshelf.Exceptions
 {
@@ -7,11 +11,7 @@ namespace Cake.Topshelf.Exceptions
     /// </summary>
     public class TopshelfException : Exception
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        public int ExitCode { get; }
-        
+        #region Constructors
         /// <summary>
         /// Initializes a new instance of the <see cref="TopshelfException" /> class.
         /// </summary>
@@ -43,5 +43,18 @@ namespace Cake.Topshelf.Exceptions
         {
             ExitCode = exitCode;
         }
+        #endregion
+
+
+
+
+
+        #region Properties
+        /// <summary>
+        /// The reason topshelf failed. 
+        /// https://github.com/Topshelf/Topshelf/blob/develop/src/Topshelf/TopshelfExitCode.cs
+        /// </summary>
+        public int ExitCode { get; }
+        #endregion
     }
 }

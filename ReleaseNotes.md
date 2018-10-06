@@ -1,3 +1,6 @@
+### New in 0.2.4 (Released 2018/10/06)
+* [Improvement] Throw exception with Topshelf exit code
+
 ### New in 0.2.3 (Released 2018/08/12)
 * [Improvement] Update to Cake.Core v0.29
 * [Improvement] Update build scripts

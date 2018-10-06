@@ -5,10 +5,8 @@ using System.Collections.Generic;
 
 using Cake.Core;
 using Cake.Core.IO;
-using Cake.Core.IO.Arguments;
 using Cake.Core.Diagnostics;
 using Cake.Topshelf.Exceptions;
-
 #endregion
 
 
@@ -27,6 +25,10 @@ namespace Cake.Topshelf
         private readonly IProcessRunner _Runner;
         private readonly ICakeLog _Log;
         #endregion
+
+
+
+
 
         #region Constructor
         /// <summary>
@@ -55,6 +57,10 @@ namespace Cake.Topshelf
             _Log = log;
         }
         #endregion
+
+
+
+
 
         #region Methods
         private void ExecuteProcess(FilePath filePath, ProcessArgumentBuilder arguments, int timeout = DefaultTimeoutMs)
