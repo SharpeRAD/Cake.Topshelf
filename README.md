@@ -32,7 +32,7 @@ Cake Build addin for managing Topshelf windows services
 
 ## Referencing
 
-[![NuGet Version](http://img.shields.io/nuget/v/Cake.Topshelf.svg?style=flat)](https://www.nuget.org/packages/Cake.Topshelf/)
+[![NuGet Version](http://img.shields.io/nuget/v/Cake.Topshelf.svg?style=flat)](https://www.nuget.org/packages/Cake.Topshelf/)[![NuGet Downloads](http://img.shields.io/nuget/dt/Cake.Topshelf.svg?style=flat)](https://www.nuget.org/packages/Cake.Topshelf/)
 
 Cake.Topshelf is available as a nuget package from the package manager console:
 
