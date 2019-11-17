@@ -1,3 +1,6 @@
+### New in 0.2.5 (Released 2019/11/17)
+* [Improvement] Update Cake.Core references
+
 ### New in 0.2.4 (Released 2018/10/06)
 * [Improvement] Throw exception with Topshelf exit code
 
