@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
         <AssemblyTitle>Cake.Topshelf</AssemblyTitle>
         <AssemblyName>Cake.Topshelf</AssemblyName>
@@ -19,6 +19,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Cake.Core" Version="0.29.0" PrivateAssets="All" />
+        <PackageReference Include="Cake.Core" Version="0.33.0" PrivateAssets="All" />
     </ItemGroup>
 </Project>
