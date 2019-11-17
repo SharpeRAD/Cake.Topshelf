@@ -30,7 +30,7 @@ namespace Cake.Topshelf.Tests
             ICakeEnvironment enviroment = CakeHelper.CreateEnvironment();
             ICakeLog log = new DebugLog();
 
-            return new TopshelfManager(enviroment, new ProcessRunner(enviroment, log), log);
+            return new TopshelfManager(enviroment, new ProcessRunner(new FileSystem(), enviroment, log, null, new FakeConfiguration()), log);
         }
         #endregion
     }
