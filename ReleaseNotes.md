@@ -1,3 +1,6 @@
+### New in 0.2.6 (Released 2019/11/17)
+* [Bug] Remove Cake.Core reference from nuspec
+
 ### New in 0.2.5 (Released 2019/11/17)
 * [Improvement] Update Cake.Core references
 
